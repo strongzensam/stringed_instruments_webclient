@@ -1,0 +1,14 @@
+<%= form_tag "/stringed_instruments/#{@stringed_instrument["id"]}", method: :patch do  %>
+  <div>
+    <%= label_tag "name" %>
+    <%= text_field_tag "name" %>
+
+  </div>
+  <div> 
+    <%= label_tag "number_of_strings" %>
+    <%= text_field_tag "number_of_strings" %>
+  </div> 
+
+  <%= submit_tag "Update" %>
+
+<% end %>
