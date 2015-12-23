@@ -11,21 +11,21 @@ class StringedInstrument
   end
 
   def self.find(id)
-    stringed_instrument_hash = Unirest.get("http://localhost:3000/stringed_instruments/#{id}.json").body
+    stringed_instrument_hash = Unirest.get("#{ENV['API_BASE_URL']}/stringed_instruments/#{id}.json", headers: {"X-User-Email": "test@test.com", "Authorization": "Token token=FartSchema"}).body
     StringedInstrument.new(stringed_instrument_hash)
   end
   def self.all
     all_array = []
-    Unirest.get("http://localhost:3000/stringed_instruments.json").body.each do |hash|
+    Unirest.get("#{ENV['API_BASE_URL']}/stringed_instruments.json", headers: {"X-User-Email": "test@test.com", "Authorization": "Token token=FartSchema"}).body.each do |hash|
       all_array << StringedInstrument.new(hash)
     end
     return all_array
   end
   def destroy
-    Unirest.delete("http://localhost:3000/stringed_instruments/#{id}.json").body
+    Unirest.delete("#{ENV['API_BASE_URL']}/stringed_instruments/#{id}.json").body
   end
   def create(parameters)
-    Unirest.post("http://localhost:3000/stringed_instruments.json", headers: {"Accept" => "application/json"}, parameters: {name: params[:name], number_of_strings: params[:number_of_strings]}).body
+    Unirest.post("#{ENV['API_BASE_URL']}/stringed_instruments.json", headers: {"Accept" => "application/json"}, parameters: {name: params[:name], number_of_strings: params[:number_of_strings]}).body
   end
 
 end
